@@ -13,7 +13,14 @@ public class Main {
  while (true) {
             System.out.println("\n--- Menu ---");
             System.out.println("1. Thêm cầu thủ");
+            System.out.println("2. Thêm trận đấu");
+
+            System.out.println("4. Hiển thị trận đấu");
             System.out.println("5. Xem thống kê đội bóng");
+     
+
+
+            System.out.println("8. Cập nhật thông tin cầu thủ");
             System.out.println("9. Hiển thị danh sách cầu thủ theo vị trí chơi");
             System.out.println("10. Hiển thị thống kê tuổi đội bóng");
             System.out.println("11. Thoát");
@@ -30,8 +37,28 @@ public class Main {
                 case 1:
                     addPlayer(team, scanner);
                     break;
+                     case 2:
+                    addMatch(team, scanner, dateFormat);
+                    break;
+                    
+
+    
+                     case 4:
+                    team.listMatches();
+                    break;
                 case 5:
                     team.showStatistics();
+                    break;
+
+
+
+
+
+
+
+
+                case 8:
+                    updatePlayer(team, scanner);
                     break;
                 case 9:
                     listPlayersByPosition(team, scanner);
@@ -73,7 +100,43 @@ public class Main {
             System.out.println("Dữ liệu nhập vào không hợp lệ: " + e.getMessage());
         }
     }
+     // Tấn: Chức năng 2 - Thêm trận đấu
+    private static void addMatch(Team team, Scanner scanner, SimpleDateFormat dateFormat) {
+        try {
+            System.out.print("Nhập ngày thi đấu (dd-MM-yyyy): ");
+            String dateString = scanner.nextLine();
+            Date matchDate = dateFormat.parse(dateString);
 
+            System.out.print("Nhập tên đối thủ: ");
+            String opponent = scanner.nextLine();
+
+            System.out.print("Nhập số bàn thắng đội nhà: ");
+            int ourScore = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Nhập số bàn thắng đội khách: ");
+            int opponentScore = Integer.parseInt(scanner.nextLine());
+
+            Match match = new Match(matchDate, opponent, ourScore, opponentScore);
+            team.addMatch(match);
+            System.out.println("Đã thêm trận đấu thành công.");
+        } catch (ParseException e) {
+            System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.");
+        } catch (NumberFormatException e) {
+            System.out.println("Dữ liệu số không hợp lệ: " + e.getMessage());
+        }
+    }
+
+
+       // Tấn: Chức năng 8 - Cập nhật thông tin cầu thủ
+    private static void updatePlayer(Team team, Scanner scanner) {
+        try {
+            System.out.print("Nhập số áo cầu thủ cần cập nhật: ");
+            int jerseyToUpdate = Integer.parseInt(scanner.nextLine());
+            team.updatePlayerInfo(jerseyToUpdate, scanner);
+        } catch (NumberFormatException e) {
+            System.out.println("Số áo phải là một số nguyên.");
+        }
+    }
     // Minh: Chức năng 9 - Hiển thị danh sách cầu thủ theo vị trí chơi
     private static void listPlayersByPosition(Team team, Scanner scanner) {
         System.out.print("Nhập vị trí chơi cần hiển thị (ví dụ: Hậu vệ, Tiền vệ, Tiền đạo): ");
