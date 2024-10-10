@@ -14,12 +14,11 @@ public class Main {
             System.out.println("\n--- Menu ---");
             System.out.println("1. Thêm cầu thủ");
             System.out.println("2. Thêm trận đấu");
-
+            System.out.println("3. Hiển thị danh sách cầu thủ");
             System.out.println("4. Hiển thị trận đấu");
             System.out.println("5. Xem thống kê đội bóng");
-     
-
-
+            System.out.println("6. Tìm kiếm cầu thủ theo tên");
+            System.out.println("7. Xóa cầu thủ");
             System.out.println("8. Cập nhật thông tin cầu thủ");
             System.out.println("9. Hiển thị danh sách cầu thủ theo vị trí chơi");
             System.out.println("10. Hiển thị thống kê tuổi đội bóng");
@@ -37,26 +36,23 @@ public class Main {
                 case 1:
                     addPlayer(team, scanner);
                     break;
-                     case 2:
+                case 2:
                     addMatch(team, scanner, dateFormat);
                     break;
-                    
-
-    
-                     case 4:
+                case 3:
+                    team.listPlayers();
+                    break;
+                case 4:
                     team.listMatches();
                     break;
                 case 5:
                     team.showStatistics();
                     break;
-
-
-
-
-
-
-
-
+                case 6:
+                    searchPlayer(team, scanner);
+                    break;
+                case 7:
+                    removePlayer(team, scanner);
                 case 8:
                     updatePlayer(team, scanner);
                     break;
@@ -123,6 +119,23 @@ public class Main {
             System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd-MM-yyyy.");
         } catch (NumberFormatException e) {
             System.out.println("Dữ liệu số không hợp lệ: " + e.getMessage());
+        }
+    }
+ // Vọng: Chức năng 6 - Tìm kiếm cầu thủ theo tên
+    private static void searchPlayer(Team team, Scanner scanner) {
+        System.out.print("Nhập tên cầu thủ cần tìm: ");
+        String searchName = scanner.nextLine();
+        team.searchPlayerByName(searchName);
+    }
+
+    // Vọng: Chức năng 7 - Xóa cầu thủ
+    private static void removePlayer(Team team, Scanner scanner) {
+        try {
+            System.out.print("Nhập số áo cầu thủ cần xóa: ");
+            int jerseyToDelete = Integer.parseInt(scanner.nextLine());
+            team.removePlayer(jerseyToDelete);
+        } catch (NumberFormatException e) {
+            System.out.println("Số áo phải là một số nguyên.");
         }
     }
 
