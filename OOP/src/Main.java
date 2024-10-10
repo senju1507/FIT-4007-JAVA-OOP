@@ -73,3 +73,16 @@ public class Main {
             System.out.println("Dữ liệu nhập vào không hợp lệ: " + e.getMessage());
         }
     }
+
+    // Minh: Chức năng 9 - Hiển thị danh sách cầu thủ theo vị trí chơi
+    private static void listPlayersByPosition(Team team, Scanner scanner) {
+        System.out.print("Nhập vị trí chơi cần hiển thị (ví dụ: Hậu vệ, Tiền vệ, Tiền đạo): ");
+        String position = scanner.nextLine();
+        team.listPlayersByPosition(position);
+    }
+
+    // 10. Hiển thị thống kê tuổi đội bóng - Được thực hiện bởi tất cả mọi người
+    private static void showAgeStatistics(Team team) {
+        team.showAgeStatistics();
+    }
+}
