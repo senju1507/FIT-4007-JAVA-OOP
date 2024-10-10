@@ -28,6 +28,18 @@ public class Team {
     public void addMatch(Match match) {
         matches.add(match);
     }
+     // Vọng: Chức năng 3 - Hiển thị danh sách cầu thủ
+    public void listPlayers() {
+        if (players.isEmpty()) {
+            System.out.println("Danh sách cầu thủ trống.");
+            return;
+        }
+        System.out.println("\n--- Danh Sách Cầu Thủ ---");
+        for (Player player : players) {
+            System.out.println(player);
+        }
+    }
+
        // Tấn: Chức năng 4 - Hiển thị trận đấu
     public void listMatches() {
         if (matches.isEmpty()) {
@@ -49,7 +61,36 @@ public class Team {
         System.out.println("Số trận đấu: " + matches.size());
 
     }
+ // Vọng: Chức năng 6 - Tìm kiếm cầu thủ theo tên
+    public void searchPlayerByName(String name) {
+        boolean found = false;
+        for (Player player : players) {
+            if (player.getName().equalsIgnoreCase(name)) {
+                System.out.println(player);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy cầu thủ có tên \"" + name + "\".");
+        }
+    }
 
+    // Vọng: Chức năng 7 - Xóa cầu thủ
+    public void removePlayer(int jerseyNumber) {
+        Player playerToRemove = null;
+        for (Player player : players) {
+            if (player.getJerseyNumber() == jerseyNumber) {
+                playerToRemove = player;
+                break;
+            }
+        }
+        if (playerToRemove != null) {
+            players.remove(playerToRemove);
+            System.out.println("Đã xóa cầu thủ với số áo " + jerseyNumber + ".");
+        } else {
+            System.out.println("Không tìm thấy cầu thủ với số áo " + jerseyNumber + ".");
+        }
+    }
 
        // Tấn: Chức năng 8 - Cập nhật thông tin cầu thủ
     public void updatePlayerInfo(int jerseyNumber, Scanner scanner) {
