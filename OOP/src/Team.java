@@ -24,6 +24,23 @@ public class Team {
         }
         players.add(player);
     }
+       // Tấn: Chức năng 2 - Thêm trận đấu
+    public void addMatch(Match match) {
+        matches.add(match);
+    }
+       // Tấn: Chức năng 4 - Hiển thị trận đấu
+    public void listMatches() {
+        if (matches.isEmpty()) {
+            System.out.println("Danh sách trận đấu trống.");
+            return;
+        }
+        System.out.println("\n--- Danh Sách Trận Đấu ---");
+        for (Match match : matches) {
+            System.out.println(match);
+        }
+    }
+
+
 // Minh: Chức năng 5 - Xem thống kê đội bóng
     public void showStatistics() {
         System.out.println("\n--- Thống Kê Đội Bóng ---");
@@ -32,6 +49,29 @@ public class Team {
         System.out.println("Số trận đấu: " + matches.size());
 
     }
+
+
+       // Tấn: Chức năng 8 - Cập nhật thông tin cầu thủ
+    public void updatePlayerInfo(int jerseyNumber, Scanner scanner) {
+        for (Player player : players) {
+            if (player.getJerseyNumber() == jerseyNumber) {
+                try {
+                    System.out.print("Nhập tên mới (hiện tại: " + player.getName() + "): ");
+                    String newName = scanner.nextLine();
+                    if (!newName.trim().isEmpty()) {
+                        player.setName(newName);
+                    }
+
+                    System.out.print("Nhập tuổi mới (hiện tại: " + player.getAge() + "): ");
+                    String ageInput = scanner.nextLine();
+                    if (!ageInput.trim().isEmpty()) {
+                        int newAge = Integer.parseInt(ageInput);
+                        if (newAge > 0) {
+                            player.setAge(newAge);
+                        } else {
+                            System.out.println("Tuổi phải là số dương. Không cập nhật tuổi.");
+                        }
+                    }
 
     // Minh: Chức năng 9 - Hiển thị danh sách cầu thủ theo vị trí chơi
     public void listPlayersByPosition(String position) {
